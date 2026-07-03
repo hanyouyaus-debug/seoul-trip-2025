@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SEOUL 5D4N — Jul 2025</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Playfair+Display:wght@400;600&family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #FAFAF8;
+            --card: #FFFFFF;
+            --text: #1A1A1A;
+            --text-secondary: #6B6B6B;
+            --accent: #2C2C2C;
+            --border: #E8E6E3;
+            --tag-bg: #F2F0ED;
+            --sunset: #E8A87C;
+            --morning: #95B8D1;
+            --night: #7B6F8E;
+            --shop: #B8C9A3;
+            --food: #D4A574;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans SC', 'Noto Sans KR', -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.8;
+            font-weight: 300;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Hero */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+            background: linear-gradient(180deg, #F5F3F0 0%, #FAFAF8 100%);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                radial-gradient(ellipse at 20% 50%, rgba(232, 168, 124, 0.06) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 20%, rgba(149, 184, 209, 0.06) 0%, transparent 50%);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3.5rem, 8vw, 7rem);
+            font-weight: 400;
+            letter-spacing: 0.15em;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero-sub {
+            font-size: 0.85rem;
+            letter-spacing: 0.4em;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            margin-bottom: 2rem;
+        }
+
+        .hero-dates {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            border-top: 1px solid var(--border);
+            padding-top: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .hero-dates span {
+            display: inline-block;
+            margin: 0 1rem;
+        }
+
+        .scroll-hint {
+            position: absolute;
+            bottom: 3rem;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.75rem;
+            letter-spacing: 0.3em;
+            color: var(--text-secondary);
+            opacity: 0.5;
+            animation: float 2s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-6px); }
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 820px;
+            margin: 0 auto;
+            padding: 4rem 2rem 6rem;
+        }
+
+        /* Overview */
+        .overview {
+            margin-bottom: 5rem;
+            padding: 3rem;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 2px;
+        }
+
+        .overview h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            font-weight: 400;
+            margin-bottom: 2rem;
+            letter-spacing: 0.05em;
+        }
+
+        .overview-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .overview-item {
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .overview-item:last-child,
+        .overview-item:nth-last-child(2) {
+            border-bottom: none;
+        }
+
+        .overview-label {
+            font-size: 0.7rem;
+            letter-spacing: 0.2em;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            margin-bottom: 0.3rem;
+        }
+
+        .overview-value {
+            font-size: 0.95rem;
+            font-weight: 400;
+        }
+
+        /* Day Sections */
+        .day-section {
+            margin-bottom: 5rem;
+        }
+
+        .day-header {
+            display: flex;
+            align-items: baseline;
+            gap: 1.2rem;
+            margin-bottom: 2.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--accent);
+        }
+
+        .day-num {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            font-weight: 400;
+            line-height: 1;
+            color: var(--accent);
+        }
+
+        .day-meta {
+            flex: 1;
+        }
+
+        .day-date {
+            font-size: 0.75rem;
+            letter-spacing: 0.2em;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+        }
+
+        .day-theme {
+            font-size: 1.1rem;
+            font-weight: 400;
+            margin-top: 0.2rem;
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0.5rem;
+            bottom: 0.5rem;
+            width: 1px;
+            background: var(--border);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 2px;
+            transition: box-shadow 0.3s ease;
+        }
+
+        .timeline-item:hover {
+            box-shadow: 0 2px 20px rgba(0,0,0,0.04);
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2.35rem;
+            top: 1.8rem;
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--accent);
+        }
+
+        .time-badge {
+            display: inline-block;
+            font-size: 0.7rem;
+            letter-spacing: 0.15em;
+            color: var(--text-secondary);
+            padding: 0.2rem 0.6rem;
+            background: var(--tag-bg);
+            border-radius: 1px;
+            margin-bottom: 0.6rem;
+        }
+
+        .timeline-title {
+            font-size: 1rem;
+            font-weight: 500;
+            margin-bottom: 0.4rem;
+        }
+
+        .timeline-desc {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        .timeline-tags {
+            margin-top: 0.8rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+        }
+
+        .tag {
+            font-size: 0.65rem;
+            letter-spacing: 0.1em;
+            padding: 0.2rem 0.5rem;
+            border-radius: 1px;
+            font-weight: 400;
+        }
+
+        .tag-sunset { background: rgba(232, 168, 124, 0.15); color: #B87A4E; }
+        .tag-morning { background: rgba(149, 184, 209, 0.15); color: #5A8BAD; }
+        .tag-shop { background: rgba(184, 201, 163, 0.15); color: #6B8A4F; }
+        .tag-food { background: rgba(212, 165, 116, 0.15); color: #9B7040; }
+        .tag-beauty { background: rgba(200, 162, 200, 0.15); color: #8B5E8B; }
+        .tag-culture { background: rgba(160, 180, 200, 0.15); color: #5A7A9A; }
+
+        /* Walk-in Eats */
+        .food-note {
+            margin-top: 1.5rem;
+            padding: 1.2rem 1.5rem;
+            background: rgba(212, 165, 116, 0.06);
+            border-left: 2px solid var(--food);
+            font-size: 0.82rem;
+            color: var(--text-secondary);
+        }
+
+        .food-note strong {
+            color: var(--text);
+            font-weight: 500;
+        }
+
+        /* Tips Section */
+        .tips-section {
+            margin-top: 5rem;
+            padding: 3rem;
+            background: var(--card);
+            border: 1px solid var(--border);
+        }
+
+        .tips-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            font-weight: 400;
+            margin-bottom: 2rem;
+            letter-spacing: 0.05em;
+        }
+
+        .tips-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .tip-group h3 {
+            font-size: 0.7rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+            margin-bottom: 0.8rem;
+        }
+
+        .tip-group ul {
+            list-style: none;
+        }
+
+        .tip-group li {
+            font-size: 0.85rem;
+            padding: 0.4rem 0;
+            border-bottom: 1px solid var(--tag-bg);
+            color: var(--text-secondary);
+        }
+
+        .tip-group li:last-child {
+            border-bottom: none;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 4rem 2rem;
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            letter-spacing: 0.2em;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .overview-grid {
+                grid-template-columns: 1fr;
+            }
+            .tips-grid {
+                grid-template-columns: 1fr;
+            }
+            .hero h1 {
+                letter-spacing: 0.08em;
+            }
+            .day-num {
+                font-size: 2.5rem;
+            }
+            .container {
+                padding: 3rem 1.2rem 4rem;
+            }
+        }
+
+        /* Smooth Scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Selection */
+        ::selection {
+            background: rgba(44, 44, 44, 0.08);
+        }
+    </style>
+</head>
+<body>
+
+<section class="hero">
+    <div class="hero-content">
+        <h1>SEOUL</h1>
+        <p class="hero-sub">5 Days 4 Nights</p>
+        <div class="hero-dates">
+            <span>2025. 07. 08 — 07. 12</span>
+        </div>
+    </div>
+    <div class="scroll-hint">SCROLL</div>
+</section>
+
+<main class="container">
+
+    <!-- Overview -->
+    <section class="overview">
+        <h2>Trip Overview</h2>
+        <div class="overview-grid">
+            <div class="overview-item">
+                <div class="overview-label">到达</div>
+                <div class="overview-value">7.08 15:45 仁川机场</div>
+            </div>
+            <div class="overview-item">
+                <div class="overview-label">返程</div>
+                <div class="overview-value">7.12 14:00 仁川机场</div>
+            </div>
+            <div class="overview-item">
+                <div class="overview-label">住宿</div>
+                <div class="overview-value">明洞 G2 Hotel</div>
+            </div>
+            <div class="overview-item">
+                <div class="overview-label">风格</div>
+                <div class="overview-value">Walkin 觅食 · 随心漫游</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- DAY 1 -->
+    <section class="day-section">
+        <div class="day-header">
+            <div class="day-num">01</div>
+            <div class="day-meta">
+                <div class="day-date">Jul 08 · Tuesday</div>
+                <div class="day-theme">明洞落脚 → 梨泰院日落</div>
+            </div>
+        </div>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="time-badge">15:45</div>
+                <div class="timeline-title">抵达仁川机场</div>
+                <div class="timeline-desc">入境 + 取行李约 40min，机场铁路 AREX 直达首尔站（约 43min），换乘 4 号线至明洞</div>
+            </div>
+            <div class="timeline-item">
+                <div class="time-badge">17:30 — 18:00</div>
+                <div class="timeline-title">明洞 G2 Hotel 入住</div>
+                <div class="timeline-desc">放行李，轻装出门。酒店位于明洞核心，步行可达地铁站</div>
+            </div>
+            <div class="timeline-item">
+                <div class="time-badge">18:00 — 19:00</div>
+                <div class="timeline-title">明洞漫画街散步</div>
+                <div class="timeline-desc">明洞周边漫画主题街区，顺路感受首尔街头氛围，可以逛逛路边小店</div>
+                <div class="timeline-tags">
+                    <span class="tag tag-culture">文化</span>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="time-badge">19:00 — 21:30</div>
+                <div class="timeline-title">梨泰院 Itaewon</div>
+                <div class="timeline-desc">日落时分抵达梨泰院，沿经理团路漫步。异国料理街 walkin 觅食，推荐土耳其烤肉、墨西哥卷饼或精酿啤酒。夜晚的梨泰院很有氛围</div>
+                <div class="timeline-tags">
+                    <span class="tag tag-sunset">日落</span>
+                    <span class="tag tag-food">觅食</span>
+                </div>
+            </div>
+        </div>
+        <div class="food-note">
+            <strong>觅食推荐区域</strong> — 梨泰院经理团路一带，多国料理密集，适合随心 walk-in。解放村方向有不少本地韩食小馆。
+        </div>
+    </section>
+
+    <!-- DAY 2 -->
+    <section class="day-section">
+        <div class="day-header">
+            <div class="day-num">02</div>
+            <div class="day-meta">
+                <div class="day-date">Jul 09 · Wednesday</div>
+                <div class="day-theme">弘大美发 → 汝矣岛 → 汉江日落 → 射击</div>
+            </div>
+        </div>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="time-badge">09:30 — 12:00</div>
+                <div class="timeline-title">弘大美发沙龙</div>
+                <div class="timeline-desc">韩系发型改造，建议提前预约。弘大一带沙龙密集，做完头发可以在弘大吃个早午餐</div>
+                <div class="timeline-tags">
+                    <span class="tag tag-beauty">美发</span>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="time-badge">12:00 — 13:00</div>
+                <div class="timeline-title">弘大午餐</div>
+                <div class="timeline-desc">弘大商圈 walkin 觅食，推荐区域：延南洞巷弄（咖啡+轻食多）或弘大正街（韩式拌饭/炸鸡）</div>
+                <div class="timeline-tags">
+                    <span class="tag tag-food">觅食</span>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="time-badge">14:00 — 16:30</div>
+                <div class="timeline-title">汝矣岛 Yeouido</div>
+                <div class="timeline-desc">The Hyundai Seoul 百货（地下美食层值得一逛）、汝矣岛公园散步。IFC Mall 可作为备选</div>
+                <div class="timeline-tags">
+                    <span class="tag tag-shop">逛街</span>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="time-badge">17:00 — 18:30</div>
+                <div class="timeline-title">汉江公园 · 日落</div>
+                <div class="timeline-desc">汝矣岛汉江公园就在旁边，便利店买零食+啤酒坐在江边看日落（7月日落约 19:40）。韩剧同款体验</div>
+                <div class="timeline-tags">
+                    <span class="tag tag-sunset">日落</span>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="time-badge">18:30 — 19:00</div>
+                <div class="timeline-title">木洞射击场</div>
+                <div class="timeline-desc">营业到 19:00，建议 18:30 前到达。体验实弹射击，需护照。打车从汉江公园约 10min</div>
+                <div class="timeline-tags">
+                    <span class="tag tag-culture">体验</span>
+                </div>
+            </div>
+        </div>
+        <div class="food-note">
+            <strong>觅食推荐</strong> — 弘大延南洞：咖啡巷弄随便走都有惊喜；汝矣岛 The Hyundai B1 美食层：韩式小食集合，不用纠结选餐厅。
+        </div>
+    </section>
+
+    <!-- DAY 3 -->
+    <section class="day-section">
+        <div class="day-header">
+            <div class="day-num">03</div>
+            <div class="day-meta">
+                <div class="day-date">Jul 10 · Thursday</div>
+                <div class="day-theme">汉南洞质感 → 圣水洞潮流</div>
+            </div>
+        </div>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="time-badge">10:00 — 13:00</div>
+                <div class="timeline-title">汉南洞 Hannam-dong</div>
+                <div class="timeline-desc">首尔最有质感的街区。推荐路线：蓝色瓶子咖啡 → Koon with a View（设计品买手店）→ Gentle Monster 旗舰 → 沿路独立设计师店。整体氛围安静精致</div>
+                <div class="timeline-tags">
+                    <span class="tag tag-shop">质感好店</span>
+                    <span class="tag tag-morning">上午</span>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="time-badge">13:00 — 14:00</div>
+                <div class="timeline-title">汉南洞午餐</div>
+                <div class="timeline-desc">汉南洞不缺好餐厅，沿路 walkin 即可。西餐/日料/韩定食都有，价位偏中高但品质在线</div>
+                <div class="timeline-tags">
+                    <span class="tag tag-food">觅食</span>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="time-badge">15:00 — 19:00</div>
+                <div class="timeline-title">圣水洞 Seongsu-dong</div>
+                <div class="timeline-desc">首尔的「布鲁克林」，旧工厂改造的潮流圣地。推荐：Dior 圣水Pop-up → LCDC Seoul（复合文化空间）→ 大林仓库（展览空间）→ 各种独立潮牌店。咖啡馆每一家都很出片</div>
+                <div class="timeline-tags">
+                    <span class="tag tag-shop">潮牌</span>
+                    <span class="tag tag-culture">文化空间</span>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="time-badge">19:00 — 21:00</div>
+                <div class="timeline-title">圣水洞晚餐 + 夜逛</div>
+                <div class="timeline-desc">圣水洞入夜后也很有感觉，工业风建筑+暖灯。随心找一家评分高的韩式烤肉或创意料理</div>
+                <div class="timeline-tags">
+                    <span class="tag tag-food">觅食</span>
+                </div>
+            </div>
+        </div>
+        <div class="food-note">
+            <strong>觅食推荐</strong> — 汉南洞：Downtowner 汉堡（本地人气）、或沿路日式 Omakase；圣水洞：工厂改造餐厅氛围拉满，韩式烤肉/意面都不会踩雷。
+        </div>
+    </section>
+
+    <!-- DAY 4 -->
+    <section class="day-section">
+        <div class="day-header">
+            <div class="day-num">04</div>
+            <div class="day-meta">
+                <div class="day-date">Jul 11 · Friday</div>
+                <div class="day-theme">明洞医美 → 买买买</div>
+            </div>
+        </div>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="time-badge">09:30 — 12:00</div>
+                <div class="timeline-title">明洞医美</div>
+                <div class="timeline-desc">酒店附近步行可达，做完项目休息一下。建议预约上午第一场，避免等待</div>
+                <div class="timeline-tags">
+                    <span class="tag tag-beauty">医美</span>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="time-badge">12:00 — 13:30</div>
+                <div class="timeline-title">明洞午餐 + 药妆扫货</div>
+                <div class="timeline-desc">明洞本身就是美妆天堂。Olive Young / Chicor 可以顺路补货。午餐推荐明洞饺子或神仙雪浓汤（都是排队名店但翻桌快）</div>
+                <div class="timeline-tags">
+                    <span class="tag tag-food">觅食</span>
+                    <span class="tag tag-shop">药妆</span>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="time-badge">14:00 — 17:00</div>
+                <div class="timeline-title">乐天免税店</div>
+                <div class="timeline-desc">明洞乐天百货 9-11F 免税区，提前在 App 下单到店取货更省时。护照+回程机票信息备好</div>
+                <div class="timeline-tags">
+                    <span class="tag tag-shop">免税</span>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="time-badge">17:30 — 20:30</div>
+                <div class="timeline-title">汉南洞二刷 / 新沙洞林荫道</div>
+                <div class="timeline-desc">如果 Day3 没逛够汉南洞可以二刷；或者转去新沙洞林荫道（更偏时装/设计师品牌）。晚餐随心 walkin</div>
+                <div class="timeline-tags">
+                    <span class="tag tag-shop">逛街</span>
+                    <span class="tag tag-sunset">傍晚</span>
+                </div>
+            </div>
+        </div>
+        <div class="food-note">
+            <strong>觅食推荐</strong> — 明洞：明洞饺子（刀削面绝）、神仙雪浓汤；新沙洞：林荫道上意式/法式轻食多，适合逛累了坐下来。
+        </div>
+    </section>
+
+    <!-- DAY 5 -->
+    <section class="day-section">
+        <div class="day-header">
+            <div class="day-num">05</div>
+            <div class="day-meta">
+                <div class="day-date">Jul 12 · Saturday</div>
+                <div class="day-theme">最后的首尔清晨 → 回程</div>
+            </div>
+        </div>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="time-badge">08:00 — 09:30</div>
+                <div class="timeline-title">明洞周边早餐散步</div>
+                <div class="timeline-desc">最后一个早晨，去 Isaac Toast 吃个韩式吐司，或找一家安静的咖啡馆坐坐。南山塔方向走走也很舒服</div>
+                <div class="timeline-tags">
+                    <span class="tag tag-morning">清晨</span>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="time-badge">09:30 — 10:30</div>
+                <div class="timeline-title">退房 · 最后补货</div>
+                <div class="timeline-desc">酒店退房寄存行李（或直接带走）。还有什么想买的最后冲一波明洞 Olive Young</div>
+            </div>
+            <div class="timeline-item">
+                <div class="time-badge">10:30 — 11:00</div>
+                <div class="timeline-title">出发前往仁川机场</div>
+                <div class="timeline-desc">明洞 → 首尔站 → AREX 直通列车（43min）→ 仁川机场。建议 11:00 前出发，预留充足时间</div>
+            </div>
+            <div class="timeline-item">
+                <div class="time-badge">14:00</div>
+                <div class="timeline-title">仁川机场起飞 ✈</div>
+                <div class="timeline-desc">提前到机场取免税品（乐天线上订单在登机口取）。机场新罗/乐天还可以最后一轮扫货</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tips -->
+    <section class="tips-section">
+        <h2>Practical Notes</h2>
+        <div class="tips-grid">
+            <div class="tip-group">
+                <h3>交通</h3>
+                <ul>
+                    <li>T-money 卡地铁便利店均可用</li>
+                    <li>短途打车起步 4800₩ 很便宜</li>
+                    <li>Kakao Map 比 Google 好用</li>
+                    <li>AREX 直通车提前购票省排队</li>
+                </ul>
+            </div>
+            <div class="tip-group">
+                <h3>支付</h3>
+                <ul>
+                    <li>大部分可刷 Visa/Master</li>
+                    <li>备少量现金（传统市场用）</li>
+                    <li>免税店支持支付宝/微信</li>
+                    <li>出租车支持刷卡</li>
+                </ul>
+            </div>
+            <div class="tip-group">
+                <h3>觅食心法</h3>
+                <ul>
+                    <li>Naver Map 看评分比大众点评准</li>
+                    <li>排队超 10 人的大概率不踩雷</li>
+                    <li>便利店（CU/GS25）深夜神器</li>
+                    <li>7 月热，冷面/冰美式是标配</li>
+                </ul>
+            </div>
+            <div class="tip-group">
+                <h3>注意事项</h3>
+                <ul>
+                    <li>7 月首尔高温+梅雨，带伞</li>
+                    <li>射击场需携带护照</li>
+                    <li>医美当天避免暴晒</li>
+                    <li>免税品机场取货需预留时间</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<footer class="footer">
+    SEOUL · SUMMER 2025 — HAVE A GOOD TRIP
+</footer>
+
+</body>
+</html>
